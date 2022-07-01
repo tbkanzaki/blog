@@ -1,0 +1,37 @@
+<!--
+O método auxiliar form_with instancia um construtor de formulários. No bloco form_with, chamamos métodos como label e text_field no construtor de formulários para gerar os elementos de formulário apropriados.
+
+antes a primeira linha a variável de instancia @article 
+form_with model: @article  do |form|
+mas ela foi substituídas por article (variavel local) 
+Como parciais (arquivos compartilhados) são códigos compartilhados, é uma prática recomendada que eles não dependam de variáveis de instância específicas, definidas por uma ação do controlador. Em vez disso, passaremos o artigo para o parcial como uma variável local article.
+-->
+<%= form_with model: article  do |form| %>
+	<div>
+		<%= form.label :title %><br>
+		<%= form.text_field :title %>
+		<% article.errors.full_messages_for(:title).each do |message| %>
+			<div><%= message %></div>
+		<% end %>
+	</div>
+
+	<div>
+		<%= form.label :body %><br>
+		<%= form.text_area :body %>
+		<% article.errors.full_messages_for(:body).each do |message| %>
+			<div><%= message %></div>
+		<% end %>
+	</div>
+	
+	<p>
+		<%= form.label :status %><br>
+		<%= form.select :status, ['public','privado','archived'], 
+		selected: 'public' %>
+	</p>
+	
+	<div>
+		<%= form.submit %>
+	</div>
+<% end %>
+
+

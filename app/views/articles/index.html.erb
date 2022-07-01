@@ -1,0 +1,24 @@
+<!-- 
+Com o uso do metodo resources no arquivo de rotas, podemos usar
+vários metodos auxiliares:
+O auxiliar link_to renderiza um link com seu primeiro argumento como texto do link e seu segundo argumento como destino do link. Se passarmos um objeto de modelo como segundo argumento, link_to chamará o auxiliar de caminho apropriado para converter o objeto em um caminho. Por exemplo, se passarmos um artigo, link_to chamará article_path 
+
+new_article_path é um metodo auxiliar que retorna uma URL (um caminho). 
+Esse método foi configurado pelo método resources
+
+-->
+
+<h1>Articles</h1>
+Our blog has <%= Article.public_count %> articles and counting!
+<ul>
+   
+
+  <% @articles.each do |article| %>
+    <% unless article.archived? %>
+      <li>
+        <%= link_to article.title, article %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<%= link_to "New Article", new_article_path %>

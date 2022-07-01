@@ -1,0 +1,26 @@
+
+<!--
+	edit_article_path e article_path säo metodos auxiliares que retorna uma URL (um caminho). 
+Esses métodos foram configurados pelo método resources
+
+No código abaixo, usamos a opção data para definir os atributos data-turbo-method e data-turbo-confirm HTML do link "Destroy". Ambos os atributos se conectam ao Turbo, que é incluído por padrão em novos aplicativos Rails. data-turbo-method="delete" fará com que o link faça uma solicitação DELETE em vez de uma solicitação GET. data-turbo-confirm="Are you sure?" fará com que uma caixa de diálogo de confirmação apareça quando o link for clicado.
+
+Lembrando que as declaracoes de associacoes has_many :comments e belongs_to :article nas classes (models) permitem um bom comportamento automático. Por exemplo, se você tiver uma variável de instância @article contendo um artigo, poderá recuperar todos os comentários pertencentes a esse artigo como uma matriz usando @article.comments usado na renderizacao dos Comentarios.
+-->
+<h1><%= @article.title %></h1>
+
+<p><%= @article.body %></p>
+
+<ul>
+	<li> <%= link_to "Edit", edit_article_path(@article) %> </li>
+	<li> <%= link_to "Destroy", article_path(@article), data:{
+						turbo_method: :delete,
+						turbo_confirm: "Are you sure?"
+						} %></li>
+</ul>
+
+<h2>Comments</h2>
+<%= render @article.comments %>
+	
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>
